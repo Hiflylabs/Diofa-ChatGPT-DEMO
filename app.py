@@ -23,11 +23,6 @@ if 'embeddings' not in st.session_state:
     st.session_state['embeddings'] = HuggingFaceEmbeddings(model_name='intfloat/multilingual-e5-large')
 
 # functions, prompts
-def generate_embeddings(text):
-    response = openai.Embedding.create(input=text, model = embedder)
-    embeddings = response['data'][0]['embedding']
-    return embeddings
-
 def generate_response(messages, MODEL, TEMPERATURE, MAX_TOKENS):
     completion = openai.ChatCompletion.create(
         model=MODEL, 
@@ -38,7 +33,6 @@ def generate_response(messages, MODEL, TEMPERATURE, MAX_TOKENS):
 
 def retrieve_relevant_chunks(user_input, db, embeddings):
 
-    #query_embedded = generate_embeddings(user_input)
     query_embedded = embeddings.embed_query(user_input)
 
     sim_docs = db.similarity_search_by_vector(query_embedded, k = MODEL_RELEVANT_DOC_NUMBER)
