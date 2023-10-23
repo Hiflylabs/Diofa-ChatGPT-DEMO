@@ -97,7 +97,7 @@ with prompt_expander:
 
 #### LOAD INDEX ####
 if 'db' not in st.session_state:
-    st.session_state['db'] = FAISS.load_local("faiss_index_e5_large_chunk1500_ppt2", st.session_state['embeddings'])
+    st.session_state['db'] = FAISS.load_local("faiss_index_e5_large", st.session_state['embeddings'])
 
 #### END OF LOAD INDEX ####
 
